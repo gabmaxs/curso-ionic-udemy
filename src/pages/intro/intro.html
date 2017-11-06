@@ -5,22 +5,36 @@
   Ionic pages and navigation.
 -->
 
-<ion-content>
+<ion-content padding>
 	<ion-slides pager>
 
 	  <ion-slide class="slide_img">
 	  	<img src="assets/imgs/slide-1.png">
-	    <h2>Slide 1</h2>
+	    <h2>Titulo 1 do App</h2>
+	    <br>
+	    <div>
+	    	<p>Slide 1 do App com funções incriveis. Lorem ipsum</p>
+	    	<p><strong>Veja Mais!</strong></p>
+	    </div>
 	  </ion-slide>
 
 	  <ion-slide class="slide_img">
 	  	<img src="assets/imgs/slide-2.png">
-	    <h2>Slide 2</h2>
+	    <h2>Titulo 2 do App</h2>
+	    <br>
+	    <div>
+	    	<p>Fusce pulvinar mollis erat, non luctus elit faucibus at.</p>
+	    </div>
 	  </ion-slide>
 
 	  <ion-slide class="slide_img">
 	  	<img src="assets/imgs/slide-3.png">
-	    <h2>Slide 3</h2>
+	    <h2>Titulo 3 do App</h2>
+	    <br>
+	    <div>
+	    	<p>Morbi tempor purus quis hendrerit gravida. Phasellus nec hendrerit neque. </p>
+	    	<a (click)="goToTabsPage()">Continuar</a>
+	    </div>
 	  </ion-slide>
 
 	</ion-slides>
