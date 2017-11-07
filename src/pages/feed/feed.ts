@@ -28,6 +28,8 @@ export class FeedPage {
     time_comment:11
   }
 
+  public lista_filmes = new Array<any>();
+
   public name_user:string = "Nome da var";
   constructor(
       public navCtrl: NavController,
@@ -47,6 +49,7 @@ export class FeedPage {
       data=>{
         const response = (data as any);
         const obj_retorno = JSON.parse(response._body);
+        this.lista_filmes = obj_retorno.results;
         console.log(obj_retorno);
       },
       error=> {
