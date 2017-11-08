@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
 
 /**
@@ -29,22 +29,19 @@ export class FeedPage {
   }
 
   public lista_filmes = new Array<any>();
+  public loader;
 
   public name_user:string = "Nome da var";
   constructor(
       public navCtrl: NavController,
       public navParams: NavParams,
       private movieProvider: MoovieProvider,
+      public loadingCtrl: LoadingController,
     ) {
   }
 
-  protected somaDois(num1:number, num2:number):void {
-  	alert(num1+num2);
-  }
-
-  ionViewDidLoad() {
-  	//this.somaDois(10,60);
-    //console.log('ionViewDidLoad FeedPage');
+  ionViewDidEnter() {
+  	this.openLoad();
     this.movieProvider.getLatestMovies().subscribe(
       data=>{
         const response = (data as any);
@@ -56,6 +53,20 @@ export class FeedPage {
         console.log(error);
       }
     )
+    this.closeLoad();
+  }
+
+  openLoad() {
+    this.loader = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+  
+    this.loader.present();
+  
+  }
+
+  closeLoad(){
+    this.loader.dismiss();
   }
 
 }
