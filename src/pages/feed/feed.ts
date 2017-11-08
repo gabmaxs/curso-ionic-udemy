@@ -30,6 +30,8 @@ export class FeedPage {
 
   public lista_filmes = new Array<any>();
   public loader;
+  public refresher;
+  public isRefreshing: boolean = false;
 
   public name_user:string = "Nome da var";
   constructor(
@@ -41,7 +43,11 @@ export class FeedPage {
   }
 
   ionViewDidEnter() {
-  	this.openLoad();
+  	this.loadMovies();
+  }
+
+  loadMovies(){
+    this.openLoad();
     this.movieProvider.getLatestMovies().subscribe(
       data=>{
         const response = (data as any);
@@ -54,6 +60,10 @@ export class FeedPage {
       }
     )
     this.closeLoad();
+    if(this.isRefreshing){
+      this.refresher.complete();
+      this.isRefreshing = false;
+    }
   }
 
   openLoad() {
@@ -67,6 +77,12 @@ export class FeedPage {
 
   closeLoad(){
     this.loader.dismiss();
+  }
+
+  doRefresh(refresher) {
+    this.refresher = refresher;
+    this.isRefreshing = true;
+    this.loadMovies();
   }
 
 }
