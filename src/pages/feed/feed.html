@@ -18,11 +18,7 @@
   </ion-refresher>
 <ion-card *ngFor="let filme of lista_filmes">
   <ion-item>
-    <ion-avatar item-start>
-      <img src="assets/imgs/marty-avatar.png">
-    </ion-avatar>
     <h2 class="feed_title">{{ filme.original_title }}</h2>
-    <p class="feed_date">{{ filme.release_date }}</p>
   </ion-item>
 
   <img [src]="'https://image.tmdb.org/t/p/w300/' + filme.backdrop_path">
@@ -31,25 +27,7 @@
     <p>{{ filme.overview }}</p>
   </ion-card-content>
 
-  <ion-row>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{ obj_feed.likes }} Likes</div>
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button icon-left clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>{{ obj_feed.comments }} Comments</div>
-      </button>
-    </ion-col>
-    <ion-col center text-center>
-      <ion-note>
-        {{ obj_feed.time_comment }} hrs atrás
-      </ion-note>
-    </ion-col>
-  </ion-row>
+  <button ion-button block (click)="abrirDetalhes(filme)">Detalhes</button>
 
 </ion-card>
 </ion-content>

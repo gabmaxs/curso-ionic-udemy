@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MoovieProvider } from '../../providers/moovie/moovie';
+import { FilmesDetalhesPage } from '../filmes-detalhes/filmes-detalhes';
 
 /**
  * Generated class for the FeedPage page.
@@ -18,16 +19,6 @@ import { MoovieProvider } from '../../providers/moovie/moovie';
   ]
 })
 export class FeedPage {
-
-  public obj_feed = {
-    title:"Titulo Json",
-    date:"07/11/2017",
-    description:"Texto de descrição. Lorem ipsum...",
-    likes:12,
-    comments:4,
-    time_comment:11
-  }
-
   public lista_filmes = new Array<any>();
   public loader;
   public refresher;
@@ -83,6 +74,10 @@ export class FeedPage {
     this.refresher = refresher;
     this.isRefreshing = true;
     this.loadMovies();
+  }
+
+  abrirDetalhes(filme){
+    this.navCtrl.push(FilmesDetalhesPage, {id: filme.id});
   }
 
 }
