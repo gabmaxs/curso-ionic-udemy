@@ -23,8 +23,9 @@ export class FeedPage {
   public loader;
   public refresher;
   public isRefreshing: boolean = false;
+  public page = 1;
+  public infiniteScroll;
 
-  public name_user:string = "Nome da var";
   constructor(
       public navCtrl: NavController,
       public navParams: NavParams,
@@ -34,16 +35,23 @@ export class FeedPage {
   }
 
   ionViewDidEnter() {
-  	this.loadMovies();
+    this.loadMovies();
+    this.page = 1;
   }
 
-  loadMovies(){
+  loadMovies(newpage: boolean = false){
     this.openLoad();
-    this.movieProvider.getLatestMovies().subscribe(
+    this.movieProvider.getLatestMovies(this.page).subscribe(
       data=>{
         const response = (data as any);
         const obj_retorno = JSON.parse(response._body);
-        this.lista_filmes = obj_retorno.results;
+        if(newpage){
+          this.lista_filmes = this.lista_filmes.concat(obj_retorno.results);
+          this.infiniteScroll.complete();
+        }else{
+          this.lista_filmes = obj_retorno.results;
+        }
+
         console.log(obj_retorno);
       },
       error=> {
@@ -80,4 +88,9 @@ export class FeedPage {
     this.navCtrl.push(FilmesDetalhesPage, {id: filme.id});
   }
 
+  doInfinite(infiniteScroll) {
+    this.infiniteScroll = infiniteScroll;
+    this.page++;
+    this.loadMovies(true);
+  }
 }
